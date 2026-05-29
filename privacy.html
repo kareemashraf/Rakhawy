@@ -214,6 +214,12 @@ Back to Home
 </div>
 </section>
 
+<!-- Back to Top -->
+<a class="fixed bottom-8 right-8 z-[60] bg-neon-energy text-background p-4 rounded-full shadow-2xl hover:scale-110 transition-transform active:scale-95 group" href="#" id="backToTop" style="display:none">
+<span class="material-symbols-outlined text-3xl font-bold">arrow_upward</span>
+<span class="absolute right-full mr-4 top-1/2 -translate-y-1/2 bg-charcoal-surface text-white px-3 py-1 rounded text-sm opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Back to Top</span>
+</a>
+
 <!-- Footer -->
 <footer class="bg-surface-container-lowest w-full py-16 md:py-section-gap border-t border-glass-stroke">
 <div class="px-margin-mobile md:px-gutter max-w-container-max mx-auto">
@@ -292,8 +298,11 @@ Back to Home
 
     var nav = document.getElementById('mainNav');
     window.addEventListener('scroll', function() {
-        if (window.scrollY > 50) { nav.classList.add('nav-scrolled'); }
+        var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        if (winScroll > 50) { nav.classList.add('nav-scrolled'); }
         else { nav.classList.remove('nav-scrolled'); }
+        var backBtn = document.getElementById('backToTop');
+        if (backBtn) backBtn.style.display = winScroll > 300 ? 'flex' : 'none';
     });
 </script>
 </body>

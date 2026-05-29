@@ -305,10 +305,10 @@
 </div>
 </div>
 </section>
-<!-- Floating Action Button -->
-<a class="fixed bottom-8 right-8 z-[60] bg-neon-energy text-background p-4 rounded-full shadow-2xl hover:scale-110 transition-transform active:scale-95 group" href="#contact">
-<span class="material-symbols-outlined text-3xl font-bold">bolt</span>
-<span class="absolute right-full mr-4 top-1/2 -translate-y-1/2 bg-charcoal-surface text-white px-3 py-1 rounded text-sm opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Book Now</span>
+<!-- Back to Top -->
+<a class="fixed bottom-8 right-8 z-[60] bg-neon-energy text-background p-4 rounded-full shadow-2xl hover:scale-110 transition-transform active:scale-95 group" href="#" id="backToTop">
+<span class="material-symbols-outlined text-3xl font-bold">arrow_upward</span>
+<span class="absolute right-full mr-4 top-1/2 -translate-y-1/2 bg-charcoal-surface text-white px-3 py-1 rounded text-sm opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Back to Top</span>
 </a>
 <!-- About Section -->
 <section class="py-16 md:py-section-gap px-margin-mobile md:px-gutter max-w-container-max mx-auto overflow-hidden" id="about">
@@ -724,6 +724,12 @@
                 nav.classList.add('nav-scrolled');
             } else {
                 nav.classList.remove('nav-scrolled');
+            }
+            
+            // Back to Top visibility
+            var backBtn = document.getElementById('backToTop');
+            if (backBtn) {
+                backBtn.style.display = winScroll > 300 ? 'flex' : 'none';
             }
             
             // Reveal on Scroll
