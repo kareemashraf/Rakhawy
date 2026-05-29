@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900" fill="none">
+  <defs>
+    <radialGradient id="g1" cx="50%" cy="40%" r="70%">
+      <stop offset="0%" stop-color="#1a1a1a"/>
+      <stop offset="60%" stop-color="#0a0a0a"/>
+      <stop offset="100%" stop-color="#000"/>
+    </radialGradient>
+    <radialGradient id="g2" cx="30%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#B9FF66" stop-opacity=".03"/>
+      <stop offset="100%" stop-color="#B9FF66" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="g3" cx="70%" cy="60%" r="40%">
+      <stop offset="0%" stop-color="#B9FF66" stop-opacity=".02"/>
+      <stop offset="100%" stop-color="#B9FF66" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="fog" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#000" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#B9FF66" stop-opacity=".02"/>
+      <stop offset="100%" stop-color="#000" stop-opacity=".4"/>
+    </linearGradient>
+    <filter id="blur">
+      <feGaussianBlur stdDeviation="30"/>
+    </filter>
+  </defs>
+  <rect width="1440" height="900" fill="url(#g1)"/>
+  <rect width="1440" height="900" fill="url(#g2)"/>
+  <rect width="1440" height="900" fill="url(#g3)"/>
+  <!-- Gym equipment silhouettes -->
+  <g opacity=".04" stroke="#B9FF66" stroke-width="2" filter="url(#blur)">
+    <line x1="100" y1="200" x2="300" y2="200"/>
+    <line x1="100" y1="200" x2="100" y2="600"/>
+    <line x1="300" y1="200" x2="300" y2="600"/>
+    <line x1="1200" y1="300" x2="1300" y2="300"/>
+    <line x1="1200" y1="300" x2="1200" y2="700"/>
+    <line x1="1300" y1="300" x2="1300" y2="700"/>
+  </g>
+  <rect width="1440" height="900" fill="url(#fog)" opacity=".3"/>
+  <!-- Light beam -->
+  <polygon points="200,0 500,0 800,900 300,900" fill="#B9FF66" opacity=".015"/>
+  <polygon points="1000,0 1200,0 1400,900 1100,900" fill="#B9FF66" opacity=".01"/>
+</svg>

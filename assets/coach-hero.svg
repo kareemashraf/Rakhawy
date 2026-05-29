@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 700" fill="none">
+  <defs>
+    <linearGradient id="rim" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#B9FF66" stop-opacity=".08"/>
+      <stop offset="40%" stop-color="#B9FF66" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#B9FF66" stop-opacity=".12"/>
+    </linearGradient>
+    <linearGradient id="skin" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e8c090"/>
+      <stop offset="100%" stop-color="#c4956e"/>
+    </linearGradient>
+    <linearGradient id="shirt" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a1a1a"/>
+      <stop offset="100%" stop-color="#0a0a0a"/>
+    </linearGradient>
+    <linearGradient id="shorts" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#111"/>
+      <stop offset="100%" stop-color="#050505"/>
+    </linearGradient>
+    <radialGradient id="glowSpot" cx="45%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#B9FF66" stop-opacity=".04"/>
+      <stop offset="100%" stop-color="#B9FF66" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <!-- Background glow -->
+  <rect width="500" height="700" fill="#000"/>
+  <rect width="500" height="700" fill="url(#glowSpot)"/>
+
+  <!-- Feet/Shoes -->
+  <rect x="195" y="638" width="42" height="18" rx="6" fill="#050505"/>
+  <rect x="263" y="640" width="42" height="18" rx="6" fill="#050505"/>
+  <rect x="195" y="638" width="42" height="6" rx="3" fill="#B9FF66" opacity=".3"/>
+  <rect x="263" y="640" width="42" height="6" rx="3" fill="#B9FF66" opacity=".3"/>
+
+  <!-- Legs -->
+  <path d="M210 500 l-8 100 q-2 20 4 26 l16 12 q8-2 6-20 l-4-88 z" fill="#111"/>
+  <path d="M290 500 l8 100 q2 20-4 26l-16 12q-8-2-6-20l4-88z" fill="#111"/>
+  <!-- Quadriceps definition -->
+  <path d="M215 510 Q225 560 218 580" stroke="#1a1a1a" stroke-width="1.5" fill="none"/>
+  <path d="M285 510 Q275 560 282 580" stroke="#1a1a1a" stroke-width="1.5" fill="none"/>
+
+  <!-- Shorts -->
+  <path d="M200 440 q-6 16-8 50 l-4 16 q-2 8 6 10 l22 4 q8-2 10-12 l4-40 q0-16 6-28 z" fill="url(#shorts)"/>
+  <path d="M300 440 q6 16 8 50l4 16q2 8-6 10l-22 4q-8-2-10-12l-4-40q0-16-6-28z" fill="url(#shorts)"/>
+  <path d="M200 440 q50 12 100 0" stroke="#B9FF66" stroke-opacity=".08" stroke-width="1" fill="none"/>
+
+  <!-- Torso / Black sleeveless shirt -->
+  <path d="M188 210 l-10 30 q-8 60-6 108 l2 52 q0 18 10 28 l20 12 q16 4 32 0 l24-12 q12-8 14-28 l2-52 q2-48-6-108 l-10-30 q-14 8-36 8 t-36-8z" fill="url(#shirt)"/>
+
+  <!-- Chest definition lines -->
+  <path d="M215 250 Q250 280 285 250" stroke="#222" stroke-width="2" fill="none" opacity=".5"/>
+  <path d="M225 270 Q250 290 275 270" stroke="#222" stroke-width="1.5" fill="none" opacity=".3"/>
+
+  <!-- Ab line -->
+  <path d="M250 300 L250 400" stroke="#222" stroke-width="1.5" fill="none" opacity=".4"/>
+
+  <!-- Left Arm (visible, relaxed) -->
+  <path d="M174 220 q-20 10-24 40 q-4 20 0 52 l8 20 q6 8 14 4 l10-8 q6-12 6-32v-36q0-24-8-36z" fill="url(#shirt)"/>
+  <!-- Left forearm -->
+  <path d="M166 340 q-8 18-6 38 l2 12 q2 6 8 4 l8-6 q6-10 4-28l-4-26z" fill="url(#skin)"/>
+
+  <!-- Right Arm (visible, relaxed) -->
+  <path d="M326 220 q20 10 24 40 q4 20 0 52l-8 20q-6 8-14 4l-10-8q-6-12-6-32v-36q0-24 8-36z" fill="url(#shirt)"/>
+  <!-- Right forearm -->
+  <path d="M334 340 q8 18 6 38l-2 12q-2 6-8 4l-8-6q-6-10-4-28l4-26z" fill="url(#skin)"/>
+
+  <!-- Shoulders / deltoid definition -->
+  <ellipse cx="170" cy="230" rx="22" ry="18" fill="#1a1a1a" opacity=".6"/>
+  <ellipse cx="330" cy="230" rx="22" ry="18" fill="#1a1a1a" opacity=".6"/>
+  <path d="M155 225 Q170 210 185 225" stroke="#B9FF66" stroke-opacity=".06" stroke-width="1.5" fill="none"/>
+  <path d="M315 225 Q330 210 345 225" stroke="#B9FF66" stroke-opacity=".06" stroke-width="1.5" fill="none"/>
+
+  <!-- Neck -->
+  <rect x="234" y="156" width="32" height="40" rx="8" fill="url(#skin)"/>
+
+  <!-- Head -->
+  <ellipse cx="250" cy="112" rx="40" ry="48" fill="url(#skin)"/>
+
+  <!-- Hair -->
+  <ellipse cx="250" cy="80" rx="42" ry="34" fill="#0a0a0a"/>
+  <ellipse cx="250" cy="88" rx="38" ry="26" fill="#111"/>
+  <!-- Hair detail -->
+  <path d="M210 75 Q230 60 250 65 Q270 60 290 75" stroke="#1a1a1a" stroke-width="2" fill="none"/>
+
+  <!-- Facial features (subtle) -->
+  <ellipse cx="235" cy="108" rx="2.5" ry="3" fill="#1a1a1a" opacity=".4"/>
+  <ellipse cx="265" cy="108" rx="2.5" ry="3" fill="#1a1a1a" opacity=".4"/>
+  <path d="M240 126 Q250 134 260 126" stroke="#1a1a1a" stroke-width="1.5" fill="none" opacity=".3"/>
+  <!-- Jawline -->
+  <path d="M212 130 Q230 155 250 160 Q270 155 288 130" stroke="#B9FF66" stroke-opacity=".04" stroke-width="1" fill="none"/>
+
+  <!-- Rim light effect on arm -->
+  <path d="M160 230 Q155 260 158 300" stroke="#B9FF66" stroke-opacity=".08" stroke-width="2" fill="none"/>
+  <path d="M340 230 Q345 260 342 300" stroke="#B9FF66" stroke-opacity=".08" stroke-width="2" fill="none"/>
+  <!-- Rim light on shoulder -->
+  <path d="M152 220 Q150 228 155 240" stroke="#B9FF66" stroke-opacity=".1" stroke-width="2" fill="none"/>
+
+  <!-- Ground shadow -->
+  <ellipse cx="250" cy="665" rx="120" ry="10" fill="#B9FF66" opacity=".015"/>
+
+  <!-- Sleeveless shirt neckline -->
+  <path d="M220 210 Q240 200 260 200 Q280 200 280 210" stroke="#B9FF66" stroke-opacity=".04" stroke-width="1" fill="none"/>
+
+  <!-- Overall rim light -->
+  <rect width="500" height="700" fill="url(#rim)"/>
+</svg>

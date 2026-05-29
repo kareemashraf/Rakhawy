@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 600" fill="none">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#000"/>
+      <stop offset="40%" stop-color="#0a0a0a"/>
+      <stop offset="100%" stop-color="#111"/>
+    </linearGradient>
+    <linearGradient id="fog2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#B9FF66" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#B9FF66" stop-opacity=".03"/>
+      <stop offset="100%" stop-color="#B9FF66" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="1440" height="600" fill="url(#sky)"/>
+  <rect width="1440" height="600" fill="url(#fog2)"/>
+  <!-- Mountains background -->
+  <path d="M0 450 Q180 200 360 350 Q540 150 720 280 Q900 120 1080 250 Q1260 200 1440 300 V600 H0Z" fill="#B9FF66" opacity=".015"/>
+  <path d="M0 500 Q200 300 400 420 Q600 250 800 380 Q1000 200 1200 340 Q1320 300 1440 380 V600 H0Z" fill="#B9FF66" opacity=".025"/>
+  <path d="M0 550 Q300 400 500 480 Q700 350 900 450 Q1100 380 1440 460 V600 H0Z" fill="#B9FF66" opacity=".008"/>
+  <!-- Light rays -->
+  <polygon points="600,0 700,0 900,600 500,600" fill="#B9FF66" opacity=".008"/>
+  <polygon points="800,0 900,0 1100,600 700,600" fill="#B9FF66" opacity=".005"/>
+</svg>
