@@ -612,7 +612,7 @@
 </div>
 </div>
 <form class="space-y-4" method="POST" action="https://api.web3forms.com/submit" id="contactForm">
-<input type="hidden" name="access_key" value="158cd317-fe91-4696-a6ac-0d428d87cf97"/>  <!--  Access Key  -->
+<input type="hidden" name="access_key" value="158cd317-fe91-4696-a6ac-0d428d87cf97"/>
 <input type="hidden" name="subject" value="New Coaching Inquiry - RAKHAWY"/>
 <input type="hidden" name="from_name" value="RAKHAWY Website Contact"/>
 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -626,8 +626,8 @@
 <option value="Elite Coaching">Elite Coaching</option>
 </select>
 <textarea class="bg-charcoal-surface border border-glass-stroke p-4 rounded-lg focus:ring-2 focus:ring-electric-blue focus:outline-none text-white w-full" placeholder="WHAT IS YOUR MAIN GOAL?" name="message" rows="4" required></textarea>
-<button class="w-full py-5 bg-neon-energy text-background font-label-bold text-label-bold rounded-lg hover:shadow-[0_0_30px_rgba(204,255,0,0.3)] transition-all uppercase" type="submit">Submit Application</button>
-<div id="formSuccess" class="hidden text-neon-energy text-center py-4 font-bold">Thank you! We'll be in touch within 24 hours.</div>
+<div id="formStatus" class="hidden"></div>
+<button class="w-full py-5 bg-neon-energy text-background font-label-bold text-label-bold rounded-lg hover:shadow-[0_0_30px_rgba(204,255,0,0.3)] transition-all uppercase" type="submit" id="submitBtn">Submit Application</button>
 </form>
 </div>
 </div>
@@ -785,31 +785,37 @@
         // Contact Form - Web3Forms
         (function() {
             var form = document.getElementById('contactForm');
-            var success = document.getElementById('formSuccess');
             if (!form) return;
+            var status = document.getElementById('formStatus');
+            var btn = document.getElementById('submitBtn');
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
-                var btn = form.querySelector('button[type="submit"]');
-                var originalText = btn.textContent;
                 btn.disabled = true;
                 btn.textContent = 'SENDING...';
+                status.className = 'text-center py-4 font-bold text-electric-blue';
+                status.textContent = 'Sending your application...';
+                status.classList.remove('hidden');
                 var data = new FormData(form);
                 fetch('https://api.web3forms.com/submit', {
                     method: 'POST',
                     body: data
                 }).then(function(res) { return res.json(); }).then(function(res) {
                     if (res.success) {
-                        form.classList.add('hidden');
-                        success.classList.remove('hidden');
+                        status.className = 'text-center py-4 font-bold text-neon-energy';
+                        status.textContent = 'Thank you! We\'ll be in touch within 24 hours.';
+                        form.querySelectorAll('input, select, textarea, button').forEach(function(el) { el.disabled = true; });
+                        btn.classList.add('hidden');
                     } else {
-                        alert('Something went wrong. Please email us directly at contact@trainwithrakha.com');
+                        status.className = 'text-center py-4 font-bold text-red-400';
+                        status.textContent = 'Something went wrong. Please email us at contact@trainwithrakha.com';
                         btn.disabled = false;
-                        btn.textContent = originalText;
+                        btn.textContent = 'Submit Application';
                     }
                 }).catch(function() {
-                    alert('Network error. Please email us directly at contact@trainwithrakha.com');
+                    status.className = 'text-center py-4 font-bold text-red-400';
+                    status.textContent = 'Network error. Please email us at contact@trainwithrakha.com';
                     btn.disabled = false;
-                    btn.textContent = originalText;
+                    btn.textContent = 'Submit Application';
                 });
             });
         })();
