@@ -803,6 +803,7 @@
                     if (res.success) {
                         status.className = 'text-center py-4 font-bold text-neon-energy';
                         status.textContent = 'Thank you! We\'ll be in touch within 24 hours.';
+                        form.reset();
                         form.querySelectorAll('input, select, textarea, button').forEach(function(el) { el.disabled = true; });
                         btn.classList.add('hidden');
                     } else {
