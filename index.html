@@ -611,19 +611,23 @@
 </div>
 </div>
 </div>
-<form class="space-y-4">
+<form class="space-y-4" method="POST" action="https://api.web3forms.com/submit" id="contactForm">
+<input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE"/>
+<input type="hidden" name="subject" value="New Coaching Inquiry - RAKHAWY"/>
+<input type="hidden" name="from_name" value="RAKHAWY Website Contact"/>
 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-<input class="bg-charcoal-surface border border-glass-stroke p-4 rounded-lg focus:ring-2 focus:ring-electric-blue focus:outline-none text-white w-full" placeholder="FULL NAME" type="text"/>
-<input class="bg-charcoal-surface border border-glass-stroke p-4 rounded-lg focus:ring-2 focus:ring-electric-blue focus:outline-none text-white w-full" placeholder="EMAIL ADDRESS" type="email"/>
+<input class="bg-charcoal-surface border border-glass-stroke p-4 rounded-lg focus:ring-2 focus:ring-electric-blue focus:outline-none text-white w-full" placeholder="FULL NAME" type="text" name="name" required/>
+<input class="bg-charcoal-surface border border-glass-stroke p-4 rounded-lg focus:ring-2 focus:ring-electric-blue focus:outline-none text-white w-full" placeholder="EMAIL ADDRESS" type="email" name="email" required/>
 </div>
-<select class="bg-charcoal-surface border border-glass-stroke p-4 rounded-lg focus:ring-2 focus:ring-electric-blue focus:outline-none text-white w-full">
-<option>SELECT PLAN</option>
-<option>Starter</option>
-<option>Pro Transformation</option>
-<option>Elite Coaching</option>
+<select class="bg-charcoal-surface border border-glass-stroke p-4 rounded-lg focus:ring-2 focus:ring-electric-blue focus:outline-none text-white w-full" name="plan">
+<option value="">SELECT PLAN</option>
+<option value="Starter">Starter</option>
+<option value="Pro Transformation">Pro Transformation</option>
+<option value="Elite Coaching">Elite Coaching</option>
 </select>
-<textarea class="bg-charcoal-surface border border-glass-stroke p-4 rounded-lg focus:ring-2 focus:ring-electric-blue focus:outline-none text-white w-full" placeholder="WHAT IS YOUR MAIN GOAL?" rows="4"></textarea>
-<button class="w-full py-5 bg-neon-energy text-background font-label-bold text-label-bold rounded-lg hover:shadow-[0_0_30px_rgba(204,255,0,0.3)] transition-all uppercase">Submit Application</button>
+<textarea class="bg-charcoal-surface border border-glass-stroke p-4 rounded-lg focus:ring-2 focus:ring-electric-blue focus:outline-none text-white w-full" placeholder="WHAT IS YOUR MAIN GOAL?" name="message" rows="4" required></textarea>
+<button class="w-full py-5 bg-neon-energy text-background font-label-bold text-label-bold rounded-lg hover:shadow-[0_0_30px_rgba(204,255,0,0.3)] transition-all uppercase" type="submit">Submit Application</button>
+<div id="formSuccess" class="hidden text-neon-energy text-center py-4 font-bold">Thank you! We'll be in touch within 24 hours.</div>
 </form>
 </div>
 </div>
@@ -777,6 +781,38 @@
 
         // Year
         document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Contact Form - Web3Forms
+        (function() {
+            var form = document.getElementById('contactForm');
+            var success = document.getElementById('formSuccess');
+            if (!form) return;
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                var btn = form.querySelector('button[type="submit"]');
+                var originalText = btn.textContent;
+                btn.disabled = true;
+                btn.textContent = 'SENDING...';
+                var data = new FormData(form);
+                fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    body: data
+                }).then(function(res) { return res.json(); }).then(function(res) {
+                    if (res.success) {
+                        form.classList.add('hidden');
+                        success.classList.remove('hidden');
+                    } else {
+                        alert('Something went wrong. Please email us directly at contact@trainwithrakha.com');
+                        btn.disabled = false;
+                        btn.textContent = originalText;
+                    }
+                }).catch(function() {
+                    alert('Network error. Please email us directly at contact@trainwithrakha.com');
+                    btn.disabled = false;
+                    btn.textContent = originalText;
+                });
+            });
+        })();
 
     </script>
 </body></html>
