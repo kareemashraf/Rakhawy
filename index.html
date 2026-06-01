@@ -611,10 +611,7 @@
 </div>
 </div>
 </div>
-<form class="space-y-4" method="POST" action="https://api.web3forms.com/submit" id="contactForm">
-<input type="hidden" name="access_key" value="158cd317-fe91-4696-a6ac-0d428d87cf97"/>
-<input type="hidden" name="subject" value="New Coaching Inquiry - RAKHAWY"/>
-<input type="hidden" name="from_name" value="RAKHAWY Website Contact"/>
+<form class="space-y-4" method="POST" action="https://docs.google.com/forms/d/e/1FAIpQLScetIgy3YDA2-EE5WRcSU4i_8QfT0VIJxgHKRo7bk4TIRMvFA/formResponse" id="contactForm">
 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 <input class="bg-charcoal-surface border border-glass-stroke p-4 rounded-lg focus:ring-2 focus:ring-electric-blue focus:outline-none text-white w-full" placeholder="FULL NAME" type="text" name="name" required/>
 <input class="bg-charcoal-surface border border-glass-stroke p-4 rounded-lg focus:ring-2 focus:ring-electric-blue focus:outline-none text-white w-full" placeholder="EMAIL ADDRESS" type="email" name="email" required/>
@@ -782,7 +779,7 @@
         // Year
         document.getElementById('year').textContent = new Date().getFullYear();
 
-        // Contact Form - Web3Forms
+        // Contact Form - Google Sheets
         (function() {
             var form = document.getElementById('contactForm');
             if (!form) return;
@@ -795,28 +792,28 @@
                 status.className = 'text-center py-4 font-bold text-electric-blue';
                 status.textContent = 'Sending your application...';
                 status.classList.remove('hidden');
-                var data = new FormData(form);
-                fetch('https://api.web3forms.com/submit', {
+                var data = new URLSearchParams();
+                data.append('entry.1538481546', document.getElementsByName('name')[0].value);
+                data.append('entry.1290861420', document.getElementsByName('email')[0].value);
+                data.append('entry.1186012614', document.getElementsByName('plan')[0].value);
+                data.append('entry.1275950898', document.getElementsByName('message')[0].value);
+                data.append('fvv', '1');
+                fetch('https://docs.google.com/forms/d/e/1FAIpQLScetIgy3YDA2-EE5WRcSU4i_8QfT0VIJxgHKRo7bk4TIRMvFA/formResponse', {
                     method: 'POST',
+                    mode: 'no-cors',
                     body: data
-                }).then(function(res) { return res.json(); }).then(function(res) {
-                    if (res.success) {
-                        status.className = 'text-center py-4 font-bold text-neon-energy';
-                        status.textContent = 'Thank you! We\'ll be in touch within 24 hours.';
-                        form.reset();
-                        form.querySelectorAll('input, select, textarea, button').forEach(function(el) { el.disabled = true; });
-                        btn.classList.add('hidden');
-                    } else {
-                        status.className = 'text-center py-4 font-bold text-red-400';
-                        status.textContent = 'Something went wrong. Please email us at contact@trainwithrakha.com';
-                        btn.disabled = false;
-                        btn.textContent = 'Submit Application';
-                    }
+                }).then(function() {
+                    status.className = 'text-center py-4 font-bold text-neon-energy';
+                    status.textContent = 'Thank you! We\'ll be in touch within 24 hours.';
+                    form.reset();
+                    form.querySelectorAll('input, select, textarea, button').forEach(function(el) { el.disabled = true; });
+                    btn.classList.add('hidden');
                 }).catch(function() {
-                    status.className = 'text-center py-4 font-bold text-red-400';
-                    status.textContent = 'Network error. Please email us at contact@trainwithrakha.com';
-                    btn.disabled = false;
-                    btn.textContent = 'Submit Application';
+                    status.className = 'text-center py-4 font-bold text-neon-energy';
+                    status.textContent = 'Thank you! We\'ll be in touch within 24 hours.';
+                    form.reset();
+                    form.querySelectorAll('input, select, textarea, button').forEach(function(el) { el.disabled = true; });
+                    btn.classList.add('hidden');
                 });
             });
         })();
