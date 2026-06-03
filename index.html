@@ -579,7 +579,7 @@
             <h3 class="font-label-bold text-label-bold text-secondary mb-2">STARTER</h3>
             <div class="flex items-baseline mb-8">
                 <span class="font-display-lg-mobile text-headline-lg text-secondary">€49.99</span>
-                <span class="text-on-surface-variant ml-2">/mo</span>
+                <span class="text-on-surface-variant ml-2">/2 mo</span>
             </div>
             <ul class="space-y-4 mb-10 flex-grow">
                 <li class="flex items-center gap-3 text-on-surface-variant"><span
@@ -608,7 +608,7 @@
             <h3 class="font-label-bold text-label-bold text-secondary mb-2">PRO TRANSFORMATION</h3>
             <div class="flex items-baseline mb-8">
                 <span class="font-display-lg-mobile text-headline-lg text-secondary">€99</span>
-                <span class="text-on-surface-variant ml-2">/mo</span>
+                <span class="text-on-surface-variant ml-2">/4 mo</span>
                 <span class="mx-auto inline-flex items-center rounded-full bg-red-500/20 px-3 py-1 text-xs font-medium text-blue-400">20% OFF</span>
             </div>
             <ul class="space-y-4 mb-10 flex-grow">
@@ -640,7 +640,7 @@
             <h3 class="font-label-bold text-label-bold text-secondary mb-2">ELITE COACHING</h3>
             <div class="flex items-baseline mb-8">
                 <span class="font-display-lg-mobile text-headline-lg text-secondary">€199.99</span>
-                <span class="text-on-surface-variant ml-2">/mo</span>
+                <span class="text-on-surface-variant ml-2">/6 mo</span>
             </div>
             <ul class="space-y-4 mb-10 flex-grow">
                 <li class="flex items-center gap-3 text-on-surface-variant"><span
@@ -882,8 +882,8 @@
                 <textarea
                         class="bg-charcoal-surface border border-glass-stroke p-4 rounded-lg focus:ring-2 focus:ring-electric-blue focus:outline-none text-white w-full"
                         placeholder="WHAT IS YOUR MAIN GOAL?" name="message" rows="4" required></textarea>
-                <div id="formStatus" class="hidden"></div>
-                <button class="w-full py-5 bg-neon-energy text-background font-label-bold text-label-bold rounded-lg hover:shadow-[0_0_30px_rgba(204,255,0,0.3)] transition-all uppercase"
+                <div id="formStatus" class="formStatus hidden"></div>
+                <button class="w-full py-5 bg-neon-energy text-background font-label-bold text-label-bold rounded-lg hover:shadow-[0_0_30px_rgba(204,255,0,0.3)] transition-all uppercase submitBtn"
                         type="submit" id="submitBtn">Submit Application
                 </button>
             </form>
@@ -968,17 +968,20 @@
             <div class="md:col-span-2">
                 <h4 class="text-neon-energy font-label-bold text-sm mb-5 tracking-widest uppercase">Stay Updated</h4>
                 <p class="text-on-surface-variant text-xs mb-4">Get weekly training tips and exclusive offers.</p>
-                <form class="flex gap-2" onsubmit="event.preventDefault();alert('Thanks for subscribing!')">
-                    <input class="flex-1 bg-surface-container border border-glass-stroke px-4 py-3 rounded-lg text-sm text-white placeholder-on-surface-variant/50 focus:ring-2 focus:ring-electric-blue focus:outline-none"
-                           placeholder="Your email" type="email" required/>
-                    <button class="px-4 py-3 bg-neon-energy text-background rounded-lg font-bold text-sm hover:shadow-[0_0_20px_rgba(204,255,0,0.3)] transition-all"
-                            type="submit">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                             stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M5 12h14"/>
-                            <path d="M12 5l7 7-7 7"/>
-                        </svg>
-                    </button>
+                <form id="secondContactForm" class="flex gap-2 flex-col" action="https://docs.google.com/forms/d/e/1FAIpQLScetIgy3YDA2-EE5WRcSU4i_8QfT0VIJxgHKRo7bk4TIRMvFA/formResponse" method="POST">
+                    <div class="flex gap-2">
+                        <input class="flex-1 bg-surface-container border border-glass-stroke px-4 py-3 rounded-lg text-sm text-white placeholder-on-surface-variant/50 focus:ring-2 focus:ring-electric-blue focus:outline-none"
+                               placeholder="Your email" type="email" name="email" required/>
+                        <button class="px-4 py-3 bg-neon-energy text-background rounded-lg font-bold text-sm hover:shadow-[0_0_20px_rgba(204,255,0,0.3)] transition-all submitBtn"
+                                type="submit">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                 stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M5 12h14"/>
+                                <path d="M12 5l7 7-7 7"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="formStatus hidden text-neon-energy text-xs"></div>
                 </form>
             </div>
 
@@ -1112,45 +1115,59 @@
     // Year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Contact Form - Google Sheets
+    // Contact Forms - Google Sheets
     (function () {
-        var form = document.getElementById('contactForm');
-        if (!form) return;
-        var status = document.getElementById('formStatus');
-        var btn = document.getElementById('submitBtn');
-        form.addEventListener('submit', function (e) {
-            e.preventDefault();
-            btn.disabled = true;
-            btn.textContent = 'SENDING...';
-            status.className = 'text-center py-4 font-bold text-electric-blue';
-            status.textContent = 'Sending your application...';
-            status.classList.remove('hidden');
-            var data = new URLSearchParams();
-            data.append('entry.1538481546', document.getElementsByName('name')[0].value);
-            data.append('entry.1290861420', document.getElementsByName('email')[0].value);
-            data.append('entry.1186012614', document.getElementsByName('plan')[0].value);
-            data.append('entry.1275950898', document.getElementsByName('message')[0].value);
-            data.append('fvv', '1');
-            fetch('https://docs.google.com/forms/d/e/1FAIpQLScetIgy3YDA2-EE5WRcSU4i_8QfT0VIJxgHKRo7bk4TIRMvFA/formResponse', {
-                method: 'POST',
-                mode: 'no-cors',
-                body: data
-            }).then(function () {
-                status.className = 'text-center py-4 font-bold text-neon-energy';
-                status.textContent = 'Thank you! We\'ll be in touch within 24 hours.';
-                form.reset();
-                form.querySelectorAll('input, select, textarea, button').forEach(function (el) {
-                    el.disabled = true;
+        var forms = document.querySelectorAll('#contactForm, #secondContactForm');
+        if (!forms.length) return;
+        forms.forEach(function (form) {
+            var status = form.querySelector('.formStatus');
+            var btn = form.querySelector('.submitBtn');
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                if (btn) {
+                    btn.disabled = true;
+                    btn.textContent = 'SENDING...';
+                }
+                if (status) {
+                    status.className = 'text-center py-4 font-bold text-electric-blue';
+                    status.textContent = 'Sending your application...';
+                    status.classList.remove('hidden');
+                }
+                var data = new URLSearchParams();
+                var nameEl = form.querySelector('[name="name"]');
+                var emailEl = form.querySelector('[name="email"]');
+                var planEl = form.querySelector('[name="plan"]');
+                var messageEl = form.querySelector('[name="message"]');
+                if (nameEl && nameEl.value) data.append('entry.1538481546', nameEl.value);
+                if (emailEl && emailEl.value) data.append('entry.1290861420', emailEl.value);
+                if (planEl && planEl.value) data.append('entry.1186012614', planEl.value);
+                if (messageEl && messageEl.value) data.append('entry.1275950898', messageEl.value);
+                data.append('fvv', '1');
+                fetch('https://docs.google.com/forms/d/e/1FAIpQLScetIgy3YDA2-EE5WRcSU4i_8QfT0VIJxgHKRo7bk4TIRMvFA/formResponse', {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    body: data
+                }).then(function () {
+                    if (status) {
+                        status.className = 'text-center py-4 font-bold text-neon-energy';
+                        status.textContent = 'Thank you! We\'ll be in touch within 24 hours.';
+                    }
+                    form.reset();
+                    form.querySelectorAll('input, select, textarea, button').forEach(function (el) {
+                        el.disabled = true;
+                    });
+                    if (btn) btn.classList.add('hidden');
+                }).catch(function () {
+                    if (status) {
+                        status.className = 'text-center py-4 font-bold text-neon-energy';
+                        status.textContent = 'Thank you! We\'ll be in touch within 24 hours.';
+                    }
+                    form.reset();
+                    form.querySelectorAll('input, select, textarea, button').forEach(function (el) {
+                        el.disabled = true;
+                    });
+                    if (btn) btn.classList.add('hidden');
                 });
-                btn.classList.add('hidden');
-            }).catch(function () {
-                status.className = 'text-center py-4 font-bold text-neon-energy';
-                status.textContent = 'Thank you! We\'ll be in touch within 24 hours.';
-                form.reset();
-                form.querySelectorAll('input, select, textarea, button').forEach(function (el) {
-                    el.disabled = true;
-                });
-                btn.classList.add('hidden');
             });
         });
     })();
