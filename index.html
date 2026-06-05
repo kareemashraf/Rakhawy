@@ -1169,5 +1169,81 @@
     })();
 
 </script>
+<script>
+    (function () {
+        var konami = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
+        var pos = 0;
+
+        function explode() {
+            var colors = ['#ccff00', '#0070f3', '#ffb4ab', '#ffb596', '#c3f400', '#aec6ff', '#fff', '#ca4e00'];
+            var canvas = document.createElement('canvas');
+            canvas.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:99999';
+            document.body.appendChild(canvas);
+            var ctx = canvas.getContext('2d');
+            var W = canvas.width = window.innerWidth;
+            var H = canvas.height = window.innerHeight;
+
+            var pieces = [];
+            for (var i = 0; i < 250; i++) {
+                pieces.push({
+                    x: W / 2 + (Math.random() - 0.5) * 200,
+                    y: H / 2 + (Math.random() - 0.5) * 100,
+                    vx: (Math.random() - 0.5) * 20,
+                    vy: -Math.random() * 18 - 4,
+                    r: Math.random() * 8 + 4,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    rot: Math.random() * 360,
+                    rotV: (Math.random() - 0.5) * 20,
+                    gravity: 0.35 + Math.random() * 0.15,
+                    life: 1,
+                    shape: Math.random() > 0.5 ? 'rect' : 'circle'
+                });
+            }
+
+            function frame() {
+                ctx.clearRect(0, 0, W, H);
+                var alive = false;
+                for (var i = 0; i < pieces.length; i++) {
+                    var p = pieces[i];
+                    p.x += p.vx;
+                    p.vy += p.gravity;
+                    p.y += p.vy;
+                    p.rot += p.rotV;
+                    p.life -= 0.008;
+                    if (p.life <= 0) continue;
+                    alive = true;
+                    ctx.save();
+                    ctx.translate(p.x, p.y);
+                    ctx.rotate(p.rot * Math.PI / 180);
+                    ctx.globalAlpha = Math.max(0, p.life);
+                    ctx.fillStyle = p.color;
+                    if (p.shape === 'rect') {
+                        ctx.fillRect(-p.r / 2, -p.r / 2, p.r, p.r);
+                    } else {
+                        ctx.beginPath();
+                        ctx.arc(0, 0, p.r / 2, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                    ctx.restore();
+                }
+                if (alive) requestAnimationFrame(frame);
+                else { canvas.remove(); }
+            }
+            frame();
+        }
+
+        document.addEventListener('keydown', function (e) {
+            if (e.keyCode === konami[pos]) {
+                pos++;
+                if (pos === konami.length) {
+                    pos = 0;
+                    explode();
+                }
+            } else {
+                pos = 0;
+            }
+        });
+    })();
+</script>
 </body>
 </html>
